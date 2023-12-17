@@ -1,0 +1,13 @@
+@import "./config";
+@import "../gameboard/gameboard.css";
+
+* {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    @include flexCenter();
+    height: 100vh;
+}

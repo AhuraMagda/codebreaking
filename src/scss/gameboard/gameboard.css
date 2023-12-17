@@ -1,0 +1,22 @@
+.game-board {
+  background-color: rgb(170, 170, 170);
+  height: 760px;
+  width: 400px;
+}
+.game-board__row {
+  background-color: rgb(90, 90, 90);
+  width: 100%;
+  height: 100px;
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.game-board__row__circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: green;
+  margin: 10px;
+}/*# sourceMappingURL=gameboard.css.map */
