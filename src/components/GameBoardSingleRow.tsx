@@ -1,4 +1,9 @@
-export default function GameBoardSingleRow( { filledValues } ) {
+
+interface GameBoardSingleRowProps {
+  filledValues: number [] | [];
+}
+
+export default function GameBoardSingleRow( { filledValues }: GameBoardSingleRowProps ) {
 
 
   return (

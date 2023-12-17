@@ -1,4 +1,8 @@
-export default function GameBoardButtons({ handleBtnClick }) {
+interface GameBoardButtonsProps {
+    handleBtnClick: (arg: number) => void;
+  }
+
+export default function GameBoardButtons({ handleBtnClick }: GameBoardButtonsProps) {
   return (
     <div className="game-board__row">
       <button

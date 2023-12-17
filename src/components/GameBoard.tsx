@@ -5,7 +5,7 @@ import GameBoardSolution from "./GameBoardSolution";
 
 export default function GameBoard() {
 
-  const [filledRow, setFilledRow] = useState([])
+  const [filledRow, setFilledRow] = useState<number[] | []>([])
 
   const handleBtnClick = (value: number) => {
     setFilledRow(prevRow => [...prevRow, value])

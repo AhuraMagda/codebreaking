@@ -1,6 +1,10 @@
 import GameBoardSingleRow from "./GameBoardSingleRow";
 
-export default function GameBoardEmpty({ filledValues }) {
+interface GameBoardEmptyProps {
+  filledValues: number [] | [];
+}
+
+export default function GameBoardEmpty({ filledValues }: GameBoardEmptyProps) {
 
     
   return (
