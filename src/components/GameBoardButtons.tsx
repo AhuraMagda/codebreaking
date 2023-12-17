@@ -1,15 +1,36 @@
-
-
-export default function GameBoardButtons() {
+export default function GameBoardButtons({ handleBtnClick }) {
   return (
     <div className="game-board__row">
-      <div className="game-board__row__circle">
+      <button
+        className="game-board__row__circle game-board__row__circle__btn"
+        onClick={() => handleBtnClick(1)}
+      >
         1
-      </div>
-      <div className="game-board__row__circle">2</div>
-      <div className="game-board__row__circle">3</div>
-      <div className="game-board__row__circle">4</div>
-      <div className="game-board__row__circle">5</div>
+      </button>
+      <button
+        className="game-board__row__circle game-board__row__circle__btn"
+        onClick={() => handleBtnClick(2)}
+      >
+        2
+      </button>
+      <button 
+      className="game-board__row__circle game-board__row__circle__btn"
+      onClick={() => handleBtnClick(3)}
+      >
+        3
+      </button>
+      <button 
+      className="game-board__row__circle game-board__row__circle__btn"
+      onClick={() => handleBtnClick(4)}
+      >
+        4
+      </button>
+      <button 
+      className="game-board__row__circle game-board__row__circle__btn"
+      onClick={() => handleBtnClick(5)}
+      >
+        5
+      </button>
     </div>
   );
 }
