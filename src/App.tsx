@@ -8,6 +8,7 @@ function App() {
       <h1>Code breaking game</h1>
 
       <GameBoard />
+      
     </>
   )
 }
