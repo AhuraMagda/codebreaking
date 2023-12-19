@@ -5,32 +5,37 @@ import GameBoardSolution from "./GameBoardSolution";
 
 export default function GameBoard() {
 
-  const [filledRow1, setFilledRow1] = useState<number[] | []>([])
-  const [filledRow2, setFilledRow2] = useState<number[] | []>([])
-  const [filledRow3, setFilledRow3] = useState<number[] | []>([])
-  const [filledRow4, setFilledRow4] = useState<number[] | []>([])
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  const [gameRow1Values, setgameRow1Values] = useState<number[] | []>([])
+  const [gameRow2Values, setgameRow2Values] = useState<number[] | []>([])
+  const [gameRow3Values, setgameRow3Values] = useState<number[] | []>([])
+  const [gameRow4Values, setgameRow4Values] = useState<number[] | []>([])
 
   const handleBtnClick = (value: number) => {
-    if (filledRow1.length < 5) {
-    setFilledRow1(prevRow => [...prevRow, value])
-    } else if (filledRow2.length < 5) {
-      setFilledRow2(prevRow => [...prevRow, value])
-    } else if (filledRow3.length < 5) {
-      setFilledRow3(prevRow => [...prevRow, value])
-    } else if (filledRow4.length < 5) {
-      setFilledRow4(prevRow => [...prevRow, value])
+    if (gameRow1Values.length < 5) {
+    setgameRow1Values(prevRow => [...prevRow, value])
+    } else if (gameRow2Values.length < 5) {
+      setgameRow2Values(prevRow => [...prevRow, value])
+    } else if (gameRow3Values.length < 5) {
+      setgameRow3Values(prevRow => [...prevRow, value])
+    } else if (gameRow4Values.length < 5) {
+      setgameRow4Values(prevRow => [...prevRow, value])
+    } else {
+      console.log("game over")
     }
   };
   
 
   return (
     <>
+      {isSuccess && <h2>CONGRATS</h2>}
       <GameBoardSolution />
       <GameBoardEmpty 
-      filledValues={filledRow1} 
-      filledValues2={filledRow2}
-      filledValues3={filledRow3}
-      filledValues4={filledRow4}
+      gameRow1Values={gameRow1Values} 
+      gameRow2Values={gameRow2Values}
+      gameRow3Values={gameRow3Values}
+      gameRow4Values={gameRow4Values}
       />
       <GameBoardButtons handleBtnClick={handleBtnClick}/>
     </>

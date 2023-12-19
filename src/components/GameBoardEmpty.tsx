@@ -1,24 +1,24 @@
 import GameBoardSingleRow from "./GameBoardSingleRow";
 
 interface GameBoardEmptyProps {
-  filledValues: number[] | [];
-  filledValues2: number[] | [];
-  filledValues3: number[] | [];
-  filledValues4: number[] | [];
+  gameRow1Values: number[] | [];
+  gameRow2Values: number[] | [];
+  gameRow3Values: number[] | [];
+  gameRow4Values: number[] | [];
 }
 
 export default function GameBoardEmpty({
-  filledValues,
-  filledValues2,
-  filledValues3,
-  filledValues4
+  gameRow1Values,
+  gameRow2Values,
+  gameRow3Values,
+  gameRow4Values
 }: GameBoardEmptyProps) {
   return (
     <div className="game-board">
-      <GameBoardSingleRow filledValues={filledValues4} />
-      <GameBoardSingleRow filledValues={filledValues3} />
-      <GameBoardSingleRow filledValues={filledValues2} />
-      <GameBoardSingleRow filledValues={filledValues} />
+      <GameBoardSingleRow filledValues={gameRow4Values} />
+      <GameBoardSingleRow filledValues={gameRow3Values} />
+      <GameBoardSingleRow filledValues={gameRow2Values} />
+      <GameBoardSingleRow filledValues={gameRow1Values} />
     </div>
   );
 }
