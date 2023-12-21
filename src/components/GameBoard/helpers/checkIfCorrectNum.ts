@@ -6,4 +6,5 @@ export const checkIfCorrectNum = (checkedArr: number[], solutionArr: number[]) =
         matchedNums.add(num);
       }
     })
+    return matchedNums.size;
   }

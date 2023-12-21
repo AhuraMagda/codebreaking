@@ -1,9 +1,10 @@
 
 interface GameBoardSingleRowProps {
   filledValues: number [] | [];
+  correctNums: number;
 }
 
-export default function GameBoardSingleRow( { filledValues }: GameBoardSingleRowProps ) {
+export default function GameBoardSingleRow( { filledValues, correctNums }: GameBoardSingleRowProps ) {
 
 
   return (
@@ -12,7 +13,7 @@ export default function GameBoardSingleRow( { filledValues }: GameBoardSingleRow
       <div className="game-board__row__circle">{filledValues[1] || ""}</div>
       <div className="game-board__row__circle">{filledValues[2] || ""}</div>
       <div className="game-board__row__circle">{filledValues[3] || ""}</div>
-      <div> 3 | 2</div>
+      <div>{correctNums}</div>
     </div> 
   );
 }
