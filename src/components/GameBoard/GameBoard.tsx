@@ -3,6 +3,7 @@ import GameBoardButtons from "./GameBoardButtons";
 import GameBoardEmpty from "./GameBoardEmpty";
 import GameBoardSolution from "./GameBoardSolution";
 import { checkIfCorrectNum } from "./helpers/checkIfCorrectNum";
+import { checkIfCorrectPlace } from "./helpers/checkIfCorrectPlace";
 
 export default function GameBoard() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -20,7 +21,7 @@ export default function GameBoard() {
   const [howManyCorrectNums3, setHowManyCorrectNums3] = useState(0);
   const [howManyCorrectNums4, setHowManyCorrectNums4] = useState(0);
 
-  
+  const [howManyCorrectPlaces1, setHowManyCorrectPlaces1] = useState(0);
 
   const handleBtnClick = (value: number) => {
     if (gameRow1Values.length < 4) {
@@ -29,6 +30,7 @@ export default function GameBoard() {
         checkIfSuccess(newRow, solution);
         if (gameRow1Values.length === 3) {
           setHowManyCorrectNums1(checkIfCorrectNum(newRow, solution));
+          setHowManyCorrectPlaces1(checkIfCorrectPlace(newRow, solution));
         }  
         return newRow;
       });
@@ -76,6 +78,7 @@ export default function GameBoard() {
 
   return (
     <>
+    {howManyCorrectPlaces1}
       {isSuccess && <h2>CONGRATS</h2>}
       {isFailure && <h2>BOOO!</h2>}
       <GameBoardSolution filledValues={solution} />
