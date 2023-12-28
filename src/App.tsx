@@ -1,5 +1,5 @@
 import GameBoard from './components/GameBoard/GameBoard'
-import './scss/main/styles.css'
+import './styles.css'
 
 // TODO
 // deleting number

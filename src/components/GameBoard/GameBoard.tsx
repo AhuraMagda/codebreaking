@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import GameBoardButtons from "./GameBoardButtons";
 import GameBoardEmpty from "./GameBoardEmpty";
 import GameBoardSolution from "./GameBoardSolution";
