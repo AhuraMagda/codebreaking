@@ -1,5 +1,5 @@
 import GameBoardSingleRow from "./GameBoardSingleRow";
-import styled from "styled-components";
+import { StyledGameBoard } from "../styles/StyledGameBoard";
 
 interface GameBoardEmptyProps {
   gameRow1Values: number[] | [];
@@ -11,17 +11,6 @@ interface GameBoardEmptyProps {
   correctNums3: number;
   correctNums4: number;
 }
-
-// gameRow = [1, 2, 2, 1]
-// solution = [1, 1, 3, 3]
-// check if 1 in solution, and delete it, check next...
-//
-
-const StyledGameBoard = styled.div`
-  background-color: rgb(143, 140, 140);
-  height: fit-content;
-  width: 400px;
-`;
 
 export default function GameBoardEmpty({
   gameRow1Values,
