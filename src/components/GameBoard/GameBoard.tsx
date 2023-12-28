@@ -5,6 +5,10 @@ import GameBoardSolution from "./GameBoardSolution";
 import { checkIfCorrectNum } from "./helpers/checkIfCorrectNum";
 import { checkIfCorrectPlace } from "./helpers/checkIfCorrectPlace";
 
+
+// TODO
+// clean this mess
+
 export default function GameBoard() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isFailure, setIsFailure] = useState(false);
@@ -31,7 +35,7 @@ export default function GameBoard() {
         if (gameRow1Values.length === 3) {
           setHowManyCorrectNums1(checkIfCorrectNum(newRow, solution));
           setHowManyCorrectPlaces1(checkIfCorrectPlace(newRow, solution));
-        }  
+        }
         return newRow;
       });
     } else if (gameRow2Values.length < 4) {
@@ -40,7 +44,7 @@ export default function GameBoard() {
         checkIfSuccess(newRow, solution);
         if (gameRow2Values.length === 3) {
           setHowManyCorrectNums2(checkIfCorrectNum(newRow, solution));
-        }  
+        }
         return newRow;
       });
     } else if (gameRow3Values.length < 4) {
@@ -49,7 +53,7 @@ export default function GameBoard() {
         checkIfSuccess(newRow, solution);
         if (gameRow3Values.length === 3) {
           setHowManyCorrectNums3(checkIfCorrectNum(newRow, solution));
-        }  
+        }
         return newRow;
       });
     } else if (gameRow4Values.length < 4) {
@@ -58,19 +62,18 @@ export default function GameBoard() {
         checkIfSuccess(newRow, solution);
         if (gameRow4Values.length === 3) {
           setHowManyCorrectNums4(checkIfCorrectNum(newRow, solution));
-        }  
+        }
         return newRow;
       });
     }
   };
-
 
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
       setIsSuccess(true);
       return;
     } else if (checkedArr.length === 4) {
-      return
+      return;
     } else if (gameRow4Values.length === 4) {
       setIsFailure(true);
     }
@@ -78,7 +81,7 @@ export default function GameBoard() {
 
   return (
     <>
-    {howManyCorrectPlaces1}
+      {howManyCorrectPlaces1}
       {isSuccess && <h2>CONGRATS</h2>}
       {isFailure && <h2>BOOO!</h2>}
       <GameBoardSolution filledValues={solution} />

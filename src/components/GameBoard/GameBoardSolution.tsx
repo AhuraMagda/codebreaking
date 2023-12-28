@@ -1,16 +1,37 @@
-// import GameBoardSingleRow from "./GameBoardSingleRow";
+import styled from "styled-components"
 
 type GameBoardSolutionProps = {
   filledValues: number[];
 }
 
+const StyledGameBoardRow = styled.div`
+  background-color: rgb(119, 194, 206);
+  width: 100%;
+  height: 100px;
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledGameBoardRowCircle = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(227, 227, 227);
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export default function GameBoardSolution({ filledValues }: GameBoardSolutionProps) {
   return (
-    <div className="game-board__row">
-      <div className="game-board__row__circle">{filledValues[0] || ""}</div>
-      <div className="game-board__row__circle">{filledValues[1] || ""}</div>
-      <div className="game-board__row__circle">{filledValues[2] || ""}</div>
-      <div className="game-board__row__circle">{filledValues[3] || ""}</div>
-    </div>
+    <StyledGameBoardRow>
+      <StyledGameBoardRowCircle>{filledValues[0] || ""}</StyledGameBoardRowCircle>
+      <StyledGameBoardRowCircle>{filledValues[1] || ""}</StyledGameBoardRowCircle>
+      <StyledGameBoardRowCircle>{filledValues[2] || ""}</StyledGameBoardRowCircle>
+      <StyledGameBoardRowCircle>{filledValues[3] || ""}</StyledGameBoardRowCircle>
+    </StyledGameBoardRow>
   );
 }

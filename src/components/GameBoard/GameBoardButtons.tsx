@@ -1,40 +1,63 @@
-interface GameBoardButtonsProps {
-    handleBtnClick: (arg: number) => void;
-  }
+import styled from "styled-components";
 
-export default function GameBoardButtons({ handleBtnClick }: GameBoardButtonsProps) {
+interface GameBoardButtonsProps {
+  handleBtnClick: (arg: number) => void;
+}
+
+const StyledGameBoardRow = styled.div`
+  background-color: rgb(119, 194, 206);
+  width: 100%;
+  height: 100px;
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledButton = styled.button`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(227, 227, 227);
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px black;
+  cursor: pointer;
+`;
+
+export default function GameBoardButtons({
+  handleBtnClick,
+}: GameBoardButtonsProps) {
   return (
-    <div className="game-board__row">
-      <button
-        className="game-board__row__circle game-board__row__circle__btn"
+    <StyledGameBoardRow>
+      <StyledButton
         onClick={() => handleBtnClick(1)}
       >
         1
-      </button>
-      <button
-        className="game-board__row__circle game-board__row__circle__btn"
+      </StyledButton>
+      <StyledButton
         onClick={() => handleBtnClick(2)}
       >
         2
-      </button>
-      <button 
-      className="game-board__row__circle game-board__row__circle__btn"
-      onClick={() => handleBtnClick(3)}
+      </StyledButton>
+      <StyledButton
+  
+        onClick={() => handleBtnClick(3)}
       >
         3
-      </button>
-      <button 
-      className="game-board__row__circle game-board__row__circle__btn"
-      onClick={() => handleBtnClick(4)}
+      </StyledButton>
+      <StyledButton
+        onClick={() => handleBtnClick(4)}
       >
         4
-      </button>
-      <button 
-      className="game-board__row__circle game-board__row__circle__btn"
-      onClick={() => handleBtnClick(5)}
+      </StyledButton>
+      <StyledButton
+        onClick={() => handleBtnClick(5)}
       >
         5
-      </button>
-    </div>
+      </StyledButton>
+    </StyledGameBoardRow>
   );
 }
