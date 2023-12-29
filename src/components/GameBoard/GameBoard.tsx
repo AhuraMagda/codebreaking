@@ -19,15 +19,36 @@ export default function GameBoard() {
   const [gameRow3Values, setGameRow3Values] = useState<number[] | []>([]);
   const [gameRow4Values, setGameRow4Values] = useState<number[] | []>([]);
 
+  const gameRowsValues = [
+    gameRow1Values,
+    gameRow2Values,
+    gameRow3Values,
+    gameRow4Values,
+  ];
+
   const [howManyCorrectNums1, setHowManyCorrectNums1] = useState(0);
   const [howManyCorrectNums2, setHowManyCorrectNums2] = useState(0);
   const [howManyCorrectNums3, setHowManyCorrectNums3] = useState(0);
   const [howManyCorrectNums4, setHowManyCorrectNums4] = useState(0);
 
+  const correctNums = [
+    howManyCorrectNums1,
+    howManyCorrectNums2,
+    howManyCorrectNums3,
+    howManyCorrectNums4,
+  ];
+
   const [howManyCorrectPlaces1, setHowManyCorrectPlaces1] = useState(0);
   const [howManyCorrectPlaces2, setHowManyCorrectPlaces2] = useState(0);
   const [howManyCorrectPlaces3, setHowManyCorrectPlaces3] = useState(0);
   const [howManyCorrectPlaces4, setHowManyCorrectPlaces4] = useState(0);
+
+  const correctPlaces = [
+    howManyCorrectPlaces1,
+    howManyCorrectPlaces2,
+    howManyCorrectPlaces3,
+    howManyCorrectPlaces4,
+  ];
 
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
@@ -94,24 +115,9 @@ export default function GameBoard() {
       {isFailure && <h2>BOOO!</h2>}
       <GameBoardSolution filledValues={solution} />
       <GameBoardEmpty
-        gameRowValues={{
-          gameRow1Values,
-          gameRow2Values,
-          gameRow3Values,
-          gameRow4Values,
-        }}
-        correctNums={{
-          howManyCorrectNums1,
-          howManyCorrectNums2,
-          howManyCorrectNums3,
-          howManyCorrectNums4,
-        }}
-        correctPlaces={{
-          howManyCorrectPlaces1,
-          howManyCorrectPlaces2,
-          howManyCorrectPlaces3,
-          howManyCorrectPlaces4,
-        }}
+        gameRowsValues={gameRowsValues}
+        correctNums={correctNums}
+        correctPlaces={correctPlaces}
       />
       {isFailure || isSuccess ? (
         <button>NEW GAME</button>
