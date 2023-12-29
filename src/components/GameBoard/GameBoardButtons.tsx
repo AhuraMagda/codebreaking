@@ -1,20 +1,25 @@
 import { StyledButton } from "../styles/StyledGameBoardButton";
 import { StyledGameBoardRow } from "../styles/StyledGameBoardRow";
 
-interface GameBoardButtonsProps {
-  handleBtnClick: (arg: number) => void;
-}
+type GameBoardButtonsProps = {
+  handleBtnClick: (value: number, rowIndex: number) => void;
+  rowIndex: number;
+};
 
-export default function GameBoardButtons({
-  handleBtnClick,
-}: GameBoardButtonsProps) {
+const GameBoardButtons: React.FC<GameBoardButtonsProps> = ({
+  handleBtnClick, rowIndex
+}) => {
+  const buttonValues = Array.from({ length: 5 }, (_, index) => index + 1);
+
   return (
     <StyledGameBoardRow>
-      <StyledButton onClick={() => handleBtnClick(1)}>1</StyledButton>
-      <StyledButton onClick={() => handleBtnClick(2)}>2</StyledButton>
-      <StyledButton onClick={() => handleBtnClick(3)}>3</StyledButton>
-      <StyledButton onClick={() => handleBtnClick(4)}>4</StyledButton>
-      <StyledButton onClick={() => handleBtnClick(5)}>5</StyledButton>
+        {buttonValues.map((value) => (
+          <StyledButton key={value} onClick={() => handleBtnClick(value, rowIndex)}>
+            {value}
+          </StyledButton>
+        ))}
     </StyledGameBoardRow>
   );
-}
+};
+
+export default GameBoardButtons;
