@@ -5,7 +5,6 @@ import GameBoardSolution from "./GameBoardSolution";
 import { checkIfCorrectNum } from "./helpers/checkIfCorrectNum";
 import { checkIfCorrectPlace } from "./helpers/checkIfCorrectPlace";
 
-
 // TODO
 // clean this mess
 
@@ -26,74 +25,93 @@ export default function GameBoard() {
   const [howManyCorrectNums4, setHowManyCorrectNums4] = useState(0);
 
   const [howManyCorrectPlaces1, setHowManyCorrectPlaces1] = useState(0);
-
-  const handleBtnClick = (value: number) => {
-    if (gameRow1Values.length < 4) {
-      setGameRow1Values((prevRow) => {
-        const newRow = [...prevRow, value];
-        checkIfSuccess(newRow, solution);
-        if (gameRow1Values.length === 3) {
-          setHowManyCorrectNums1(checkIfCorrectNum(newRow, solution));
-          setHowManyCorrectPlaces1(checkIfCorrectPlace(newRow, solution));
-        }
-        return newRow;
-      });
-    } else if (gameRow2Values.length < 4) {
-      setGameRow2Values((prevRow) => {
-        const newRow = [...prevRow, value];
-        checkIfSuccess(newRow, solution);
-        if (gameRow2Values.length === 3) {
-          setHowManyCorrectNums2(checkIfCorrectNum(newRow, solution));
-        }
-        return newRow;
-      });
-    } else if (gameRow3Values.length < 4) {
-      setGameRow3Values((prevRow) => {
-        const newRow = [...prevRow, value];
-        checkIfSuccess(newRow, solution);
-        if (gameRow3Values.length === 3) {
-          setHowManyCorrectNums3(checkIfCorrectNum(newRow, solution));
-        }
-        return newRow;
-      });
-    } else if (gameRow4Values.length < 4) {
-      setGameRow4Values((prevRow) => {
-        const newRow = [...prevRow, value];
-        checkIfSuccess(newRow, solution);
-        if (gameRow4Values.length === 3) {
-          setHowManyCorrectNums4(checkIfCorrectNum(newRow, solution));
-        }
-        return newRow;
-      });
-    }
-  };
+  const [howManyCorrectPlaces2, setHowManyCorrectPlaces2] = useState(0);
+  const [howManyCorrectPlaces3, setHowManyCorrectPlaces3] = useState(0);
+  const [howManyCorrectPlaces4, setHowManyCorrectPlaces4] = useState(0);
 
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
       setIsSuccess(true);
       return;
-    } else if (checkedArr.length === 4) {
-      return;
-    } else if (gameRow4Values.length === 4) {
+    } else if (gameRow4Values.length === 3) {
       setIsFailure(true);
+    }
+  };
+
+  // TODO add ts types
+  const checkRow = (row, setRow, value, setCorrectNum, setCorrectPlace) => {
+    setRow((prevRow) => {
+      const newRow = [...prevRow, value];
+      checkIfSuccess(newRow, solution);
+      if (row.length === 3) {
+        setCorrectNum(checkIfCorrectNum(newRow, solution));
+        setCorrectPlace(checkIfCorrectPlace(newRow, solution));
+      }
+      return newRow;
+    });
+  };
+
+  const handleBtnClick = (value: number) => {
+    if (gameRow1Values.length < 4) {
+      checkRow(
+        gameRow1Values,
+        setGameRow1Values,
+        value,
+        setHowManyCorrectNums1,
+        setHowManyCorrectPlaces1
+      );
+    } else if (gameRow2Values.length < 4) {
+      checkRow(
+        gameRow2Values,
+        setGameRow2Values,
+        value,
+        setHowManyCorrectNums2,
+        setHowManyCorrectPlaces2
+      );
+    } else if (gameRow3Values.length < 4) {
+      checkRow(
+        gameRow3Values,
+        setGameRow3Values,
+        value,
+        setHowManyCorrectNums3,
+        setHowManyCorrectPlaces3
+      );
+    } else if (gameRow4Values.length < 4) {
+      checkRow(
+        gameRow4Values,
+        setGameRow4Values,
+        value,
+        setHowManyCorrectNums4,
+        setHowManyCorrectPlaces4
+      );
     }
   };
 
   return (
     <>
-      {howManyCorrectPlaces1}
+      {/* {howManyCorrectPlaces1} */}
       {isSuccess && <h2>CONGRATS</h2>}
       {isFailure && <h2>BOOO!</h2>}
       <GameBoardSolution filledValues={solution} />
       <GameBoardEmpty
-        gameRow1Values={gameRow1Values}
-        gameRow2Values={gameRow2Values}
-        gameRow3Values={gameRow3Values}
-        gameRow4Values={gameRow4Values}
-        correctNums1={howManyCorrectNums1}
-        correctNums2={howManyCorrectNums2}
-        correctNums3={howManyCorrectNums3}
-        correctNums4={howManyCorrectNums4}
+        gameRowValues={{
+          gameRow1Values,
+          gameRow2Values,
+          gameRow3Values,
+          gameRow4Values,
+        }}
+        correctNums={{
+          howManyCorrectNums1,
+          howManyCorrectNums2,
+          howManyCorrectNums3,
+          howManyCorrectNums4,
+        }}
+        correctPlaces={{
+          howManyCorrectPlaces1,
+          howManyCorrectPlaces2,
+          howManyCorrectPlaces3,
+          howManyCorrectPlaces4,
+        }}
       />
       {isFailure || isSuccess ? (
         <button>NEW GAME</button>

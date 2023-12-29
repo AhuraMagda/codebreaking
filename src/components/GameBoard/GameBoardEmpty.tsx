@@ -2,43 +2,37 @@ import GameBoardSingleRow from "./GameBoardSingleRow";
 import { StyledGameBoard } from "../styles/StyledGameBoard";
 
 interface GameBoardEmptyProps {
-  gameRow1Values: number[] | [];
-  gameRow2Values: number[] | [];
-  gameRow3Values: number[] | [];
-  gameRow4Values: number[] | [];
-  correctNums1: number;
-  correctNums2: number;
-  correctNums3: number;
-  correctNums4: number;
+  gameRowValues: {[key: string]: number[] | []};
+  correctNums: {[key: string]: number}
+  correctPlaces: {[key: string]: number}
 }
 
 export default function GameBoardEmpty({
-  gameRow1Values,
-  gameRow2Values,
-  gameRow3Values,
-  gameRow4Values,
-  correctNums1,
-  correctNums2,
-  correctNums3,
-  correctNums4,
+  gameRowValues,
+  correctNums,
+  correctPlaces
 }: GameBoardEmptyProps) {
   return (
     <StyledGameBoard>
       <GameBoardSingleRow
-        filledValues={gameRow4Values}
-        correctNums={correctNums4}
+        filledValues={gameRowValues.gameRow4Values}
+        correctNums={correctNums.howManyCorrectNums4}
+        correctPlaces={correctPlaces.howManyCorrectPlaces4}
       />
       <GameBoardSingleRow
-        filledValues={gameRow3Values}
-        correctNums={correctNums3}
+        filledValues={gameRowValues.gameRow3Values}
+        correctNums={correctNums.howManyCorrectNums3}
+        correctPlaces={correctPlaces.howManyCorrectPlaces3}
       />
       <GameBoardSingleRow
-        filledValues={gameRow2Values}
-        correctNums={correctNums2}
+        filledValues={gameRowValues.gameRow2Values}
+        correctNums={correctNums.howManyCorrectNums2}
+        correctPlaces={correctPlaces.howManyCorrectPlaces2}
       />
       <GameBoardSingleRow
-        filledValues={gameRow1Values}
-        correctNums={correctNums1}
+        filledValues={gameRowValues.gameRow1Values}
+        correctNums={correctNums.howManyCorrectNums1}
+        correctPlaces={correctPlaces.howManyCorrectPlaces1}
       />
     </StyledGameBoard>
   );

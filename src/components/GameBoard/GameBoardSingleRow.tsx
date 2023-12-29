@@ -4,11 +4,13 @@ import { StyledGameBoardRowCircle } from "../styles/StyledGameBoardRowCircle";
 interface GameBoardSingleRowProps {
   filledValues: number[] | [];
   correctNums: number;
+  correctPlaces: number;
 }
 
 export default function GameBoardSingleRow({
   filledValues,
   correctNums,
+  correctPlaces
 }: GameBoardSingleRowProps) {
   return (
     <StyledGameBoardRow>
@@ -25,6 +27,7 @@ export default function GameBoardSingleRow({
         {filledValues[3] || ""}
       </StyledGameBoardRowCircle>
       <div>{correctNums}</div>
+      <div>{correctPlaces}</div>
     </StyledGameBoardRow>
   );
 }
