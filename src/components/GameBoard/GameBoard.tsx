@@ -27,8 +27,8 @@ export default function GameBoard() {
 
   const ROW_LENGTH = 4;
 
-  const [rowIndex, setRowIndex] = useState(0)
-  console.log(rowIndex)
+  const [rowIndex, setRowIndex] = useState(0);
+  console.log("component rerenders");
 
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
@@ -39,35 +39,32 @@ export default function GameBoard() {
     }
   };
 
-  const checkRow = (rowIndex: number, value: number) => {
+  const checkRow = (value: number, rowIndex: number) => {
+    console.log("check row runs");
     setRows((prevRows) => {
       const newRows = [...prevRows];
       const newRow = [...newRows[rowIndex].values, value];
-      checkIfSuccess(newRow, solution);
 
       if (newRow.length === ROW_LENGTH) {
+        checkIfSuccess(newRow, solution);
         newRows[rowIndex] = {
           values: newRow,
           correctNums: checkIfCorrectNum(newRow, solution),
           correctPlaces: checkIfCorrectPlace(newRow, solution),
         };
-        // TODO fix row number setting
-        setRowIndex(prev => prev+1)
       } else {
         newRows[rowIndex] = {
-          values: newRow
+          ...newRows[rowIndex],
+          values: newRow,
         };
-      } 
-
+      }
+      if (newRows[rowIndex].values.length === ROW_LENGTH) {
+        console.log("if runs");
+        // FIX this problem - it's adding 2 instead of 1 to rowIndex
+        setRowIndex((prevIndex) => prevIndex + 1);
+      }
       return newRows;
     });
-  };
-
-  const handleBtnClick = (value: number, rowIndex: number) => {
-    console.log(rowIndex)
-    if (rows[rowIndex].values.length < ROW_LENGTH) {
-      checkRow(rowIndex, value);
-    }
   };
 
   return (
@@ -79,7 +76,7 @@ export default function GameBoard() {
       {isFailure || isSuccess ? (
         <button>NEW GAME</button>
       ) : (
-        <GameBoardButtons handleBtnClick={handleBtnClick} rowIndex={rowIndex} />
+        <GameBoardButtons handleBtnClick={checkRow} rowIndex={rowIndex} />
       )}
     </>
   );
