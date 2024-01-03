@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameBoardButtons from "./GameBoardButtons";
 import GameBoardEmpty from "./GameBoardEmpty";
 import GameBoardSolution from "./GameBoardSolution";
@@ -15,15 +15,23 @@ export default function GameBoard() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isFailure, setIsFailure] = useState(false);
 
-  const [rows, setRows] = useState<RowsState[]>(
-    Array.from({ length: 4 }, () => ({
-      values: [],
-      correctNums: 0,
-      correctPlaces: 0,
-    }))
-  );
+  const initialRowsState = Array.from({ length: 4 }, () => ({
+    values: [],
+    correctNums: 0,
+    correctPlaces: 0,
+  }))
 
-  const solution = [1, 3, 4, 2];
+  const [rows, setRows] = useState<RowsState[]>(initialRowsState);
+
+  const [solution, setSolution] = useState<number[]>([])
+
+  const makeNewSolution = () => {
+    setSolution(Array.from({ length: 4 }, () => Math.ceil(Math.random() * 5)))
+  }
+
+  useEffect(()=> {
+    makeNewSolution();
+  }, [])
 
   const ROW_LENGTH = 4;
 
@@ -63,6 +71,14 @@ export default function GameBoard() {
     }
   };
 
+  const handleNewGame = () => {
+    setIsFailure(false);
+    setIsSuccess(false);
+    setRowIndex(0);
+    setRows(initialRowsState);
+    makeNewSolution();
+  };
+
   return (
     <>
       {isSuccess && <h2>CONGRATS</h2>}
@@ -70,7 +86,7 @@ export default function GameBoard() {
       <GameBoardSolution filledValues={solution} />
       <GameBoardEmpty rows={rows} />
       {isFailure || isSuccess ? (
-        <button>NEW GAME</button>
+        <button onClick={handleNewGame}>NEW GAME</button>
       ) : (
         <GameBoardButtons handleBtnClick={checkRow} rowIndex={rowIndex} />
       )}
