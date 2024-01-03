@@ -28,7 +28,6 @@ export default function GameBoard() {
   const ROW_LENGTH = 4;
 
   const [rowIndex, setRowIndex] = useState(0);
-  console.log("component rerenders");
 
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
@@ -40,7 +39,6 @@ export default function GameBoard() {
   };
 
   const checkRow = (value: number, rowIndex: number) => {
-    console.log("check row runs");
     setRows((prevRows) => {
       const newRows = [...prevRows];
       const newRow = [...newRows[rowIndex].values, value];
@@ -58,13 +56,11 @@ export default function GameBoard() {
           values: newRow,
         };
       }
-      if (newRows[rowIndex].values.length === ROW_LENGTH) {
-        console.log("if runs");
-        // FIX this problem - it's adding 2 instead of 1 to rowIndex
-        setRowIndex((prevIndex) => prevIndex + 1);
-      }
       return newRows;
     });
+    if (rows[rowIndex].values.length === ROW_LENGTH - 1) {
+      setRowIndex((prevIndex) => prevIndex + 1);
+    }
   };
 
   return (
