@@ -11,7 +11,7 @@ export default function GameBoard() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isFailure, setIsFailure] = useState(false);
 
-  const initialRowsState = Array.from({ length: 4 }, () => ({
+  const initialRowsState = Array.from({ length: 6 }, () => ({
     values: [],
     correctNums: 0,
     correctPlaces: 0,

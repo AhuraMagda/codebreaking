@@ -4,8 +4,11 @@ import { StyledGameBoardRowCircle } from "../styles/StyledGameBoardRowCircle";
 
 // TODO 
 // add type
+type GameBoardSolutionProps = {
+  values: number[] | string[];
+}
 
-export default function GameBoardSolution({ values }) {
+export default function GameBoardSolution({ values }: GameBoardSolutionProps) {
   return (
     <StyledGameBoardRow>
       <StyledGameBoardRowCircle>{values[0]}</StyledGameBoardRowCircle>

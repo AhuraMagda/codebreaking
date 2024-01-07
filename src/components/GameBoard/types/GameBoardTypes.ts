@@ -1,5 +1,5 @@
 export type GameBoardRowsState = {
     values: number[];
-    correctNums?: number;
-    correctPlaces?: number;
+    correctNums: number;
+    correctPlaces: number;
   };
