@@ -4,12 +4,8 @@ import GameBoardEmpty from "./GameBoardEmpty";
 import GameBoardSolution from "./GameBoardSolution";
 import { checkIfCorrectNum } from "./helpers/checkIfCorrectNum";
 import { checkIfCorrectPlace } from "./helpers/checkIfCorrectPlace";
-
-type RowsState = {
-  values: number[];
-  correctNums?: number;
-  correctPlaces?: number;
-};
+import { GameBoardRowsState } from "./types/GameBoardTypes";
+import { makeRandomNumArray } from "./helpers/makeRandomNumbers";
 
 export default function GameBoard() {
   const [isSuccess, setIsSuccess] = useState(false);
@@ -19,30 +15,29 @@ export default function GameBoard() {
     values: [],
     correctNums: 0,
     correctPlaces: 0,
-  }))
+  }));
 
-  const [rows, setRows] = useState<RowsState[]>(initialRowsState);
+  const [rows, setRows] = useState<GameBoardRowsState[]>(initialRowsState);
 
-  const [solution, setSolution] = useState<number[]>([])
+  const [solution, setSolution] = useState<number[]>([]);
 
-  const makeNewSolution = () => {
-    setSolution(Array.from({ length: 4 }, () => Math.ceil(Math.random() * 5)))
-  }
+  const [solutionValues, setSolutionValues] = useState<number[] | string[]>(["?", "?", "?", "?"]) 
 
-  useEffect(()=> {
-    makeNewSolution();
-  }, [])
-
-  const ROW_LENGTH = 4;
+  useEffect(() => {
+    setSolution(makeRandomNumArray);
+    console.log("this is useeffect")
+  }, []);
 
   const [rowIndex, setRowIndex] = useState(0);
 
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
       setIsSuccess(true);
+      setSolutionValues(solution)
       return;
-    } else if (rows[rows.length - 1].values.length === ROW_LENGTH - 1) {
+    } else if (rows[rows.length - 1].values.length === 3) {
       setIsFailure(true);
+      setSolutionValues(solution)
     }
   };
 
@@ -51,7 +46,7 @@ export default function GameBoard() {
       const newRows = [...prevRows];
       const newRow = [...newRows[rowIndex].values, value];
 
-      if (newRow.length === ROW_LENGTH) {
+      if (newRow.length === 4) {
         checkIfSuccess(newRow, solution);
         newRows[rowIndex] = {
           values: newRow,
@@ -66,7 +61,7 @@ export default function GameBoard() {
       }
       return newRows;
     });
-    if (rows[rowIndex].values.length === ROW_LENGTH - 1) {
+    if (rows[rowIndex].values.length === 3) {
       setRowIndex((prevIndex) => prevIndex + 1);
     }
   };
@@ -76,14 +71,19 @@ export default function GameBoard() {
     setIsSuccess(false);
     setRowIndex(0);
     setRows(initialRowsState);
-    makeNewSolution();
+    setSolution(makeRandomNumArray());
+    setSolutionValues(["?", "?", "?", "?"])
+    console.log("this is handle new game")
   };
 
+
+
+  console.log(solution);
   return (
     <>
       {isSuccess && <h2>CONGRATS</h2>}
       {isFailure && <h2>BOOO!</h2>}
-      <GameBoardSolution filledValues={solution} />
+      <GameBoardSolution values={solutionValues}/>
       <GameBoardEmpty rows={rows} />
       {isFailure || isSuccess ? (
         <button onClick={handleNewGame}>NEW GAME</button>
