@@ -1,12 +1,6 @@
 import { StyledGameBoardRow } from "../styles/StyledGameBoardRow";
 import { StyledGameBoardRowCircle } from "../styles/StyledGameBoardRowCircle";
-
-
-// TODO 
-// add type
-type GameBoardSolutionProps = {
-  values: number[] | string[];
-}
+import { GameBoardSolutionProps } from "./types/GameBoardSolutionProps";
 
 export default function GameBoardSolution({ values }: GameBoardSolutionProps) {
   return (

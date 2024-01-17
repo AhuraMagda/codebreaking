@@ -1,10 +1,6 @@
 import { StyledButton } from "../styles/StyledGameBoardButton";
 import { StyledGameBoardRow } from "../styles/StyledGameBoardRow";
-
-type GameBoardButtonsProps = {
-  handleBtnClick: (value: number, rowIndex: number) => void;
-  rowIndex: number;
-};
+import { GameBoardButtonsProps } from "./types/GameBoardButtonsTypes";
 
 const GameBoardButtons: React.FC<GameBoardButtonsProps> = ({
   handleBtnClick, rowIndex

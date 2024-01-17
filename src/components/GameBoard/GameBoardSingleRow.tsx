@@ -1,33 +1,27 @@
 import { StyledGameBoardRow } from "../styles/StyledGameBoardRow";
 import { StyledGameBoardRowCircle } from "../styles/StyledGameBoardRowCircle";
-
-interface GameBoardSingleRowProps {
-  filledValues: number[] | [];
-  correctNums: number;
-  correctPlaces: number;
-}
+import { GameBoardSingleRowProps } from "./types/GameBoardSingleRowTypes";
 
 export default function GameBoardSingleRow({
-  filledValues,
-  correctNums,
-  correctPlaces
+  rows,
+  index,
 }: GameBoardSingleRowProps) {
   return (
     <StyledGameBoardRow>
       <StyledGameBoardRowCircle>
-        {filledValues[0] || ""}
+        {rows[index].values[0] || ""}
       </StyledGameBoardRowCircle>
       <StyledGameBoardRowCircle>
-        {filledValues[1] || ""}
+        {rows[index].values[1] || ""}
       </StyledGameBoardRowCircle>
       <StyledGameBoardRowCircle>
-        {filledValues[2] || ""}
+        {rows[index].values[2] || ""}
       </StyledGameBoardRowCircle>
       <StyledGameBoardRowCircle>
-        {filledValues[3] || ""}
+        {rows[index].values[3] || ""}
       </StyledGameBoardRowCircle>
-      <div>{correctNums}</div>
-      <div>{correctPlaces}</div>
+      <div>{rows[index].correctNums}</div>
+      <div>{rows[index].correctPlaces}</div>
     </StyledGameBoardRow>
   );
 }

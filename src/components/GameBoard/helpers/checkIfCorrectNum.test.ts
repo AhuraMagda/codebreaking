@@ -5,7 +5,7 @@
 //fix import problem
 //fix problems with using TS
 
-const checkIfCorrectNum = (checked, solution) => {
+const checkIfCorrectNum = (checked: number[], solution: number[]) => {
   let count = 0;
   const solutionCopy = [...solution];
   checked.forEach(num => {
@@ -59,7 +59,7 @@ describe("checkIfCorrectNum", () => {
   });
   test("returns 0 with empty arr", () => {
     // Arrange
-    const checked = [];
+    const checked: [] = [];
     const solution = [1, 2, 3, 4];
     // Act
     const result = checkIfCorrectNum(checked, solution);
