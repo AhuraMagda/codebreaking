@@ -20,12 +20,16 @@ export default function GameBoard() {
   const [rows, setRows] = useState<GameBoardRowsState[]>(initialRowsState);
 
   const [solution, setSolution] = useState<number[]>([]);
-
-  const [solutionValues, setSolutionValues] = useState<number[] | string[]>(["?", "?", "?", "?"]) 
+  console.log(solution)
+  const [solutionValues, setSolutionValues] = useState<number[] | string[]>([
+    "?",
+    "?",
+    "?",
+    "?",
+  ]);
 
   useEffect(() => {
     setSolution(makeRandomNumArray);
-    console.log("this is useeffect")
   }, []);
 
   const [rowIndex, setRowIndex] = useState(0);
@@ -33,11 +37,11 @@ export default function GameBoard() {
   const checkIfSuccess = (checkedArr: number[], solution: number[]) => {
     if (checkedArr.toString() === solution.toString()) {
       setIsSuccess(true);
-      setSolutionValues(solution)
+      setSolutionValues(solution);
       return;
     } else if (rows[rows.length - 1].values.length === 3) {
       setIsFailure(true);
-      setSolutionValues(solution)
+      setSolutionValues(solution);
     }
   };
 
@@ -72,18 +76,15 @@ export default function GameBoard() {
     setRowIndex(0);
     setRows(initialRowsState);
     setSolution(makeRandomNumArray());
-    setSolutionValues(["?", "?", "?", "?"])
-    console.log("this is handle new game")
+    setSolutionValues(["?", "?", "?", "?"]);
+    console.log("this is handle new game");
   };
 
-
-
-  console.log(solution);
   return (
     <>
       {isSuccess && <h2>CONGRATS</h2>}
       {isFailure && <h2>BOOO!</h2>}
-      <GameBoardSolution values={solutionValues}/>
+      <GameBoardSolution values={solutionValues} />
       <GameBoardEmpty rows={rows} />
       {isFailure || isSuccess ? (
         <button onClick={handleNewGame}>NEW GAME</button>
