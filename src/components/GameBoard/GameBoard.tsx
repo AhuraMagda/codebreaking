@@ -28,12 +28,14 @@ export default function GameBoard() {
   }, []);
 
   const handleNumberPick = (value: number) => {
-    dispatch(({type: "check_row", value, rowIndex}))
+    dispatch({ type: "check_row", value});
   }
 
   const handleNewGame = () => {
     dispatch({ type: "handle_new_game" })
   }
+  console.log(solution)
+  console.log(isSuccess)
 
   return (
     <>

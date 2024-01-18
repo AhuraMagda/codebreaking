@@ -10,7 +10,7 @@ const GameBoardButtons: React.FC<GameBoardButtonsProps> = ({
   return (
     <StyledGameBoardRow>
         {buttonValues.map((value) => (
-          <StyledButton key={value} onClick={handleBtnClick(value)}>
+          <StyledButton key={value} onClick={()=>handleBtnClick(value)}>
             {value}
           </StyledButton>
         ))}

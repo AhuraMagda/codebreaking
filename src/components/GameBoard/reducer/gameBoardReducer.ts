@@ -9,6 +9,7 @@ const initialRowsState = Array.from({ length: 6 }, () => ({
 }));
 
 export const gameBoardReducer = (state, action) => {
+  // no work :<
   const checkIfSuccess = (checkedArr: number[]) => {
     if (checkedArr.toString() === state.solution.toString()) {
       return {
@@ -16,6 +17,7 @@ export const gameBoardReducer = (state, action) => {
         isSuccess: true,
         solutionValues: state.solution,
       };
+  //
     } else if (state.rows[state.rows.length - 1].values.length === 3) {
       return {
         ...state,
@@ -25,31 +27,27 @@ export const gameBoardReducer = (state, action) => {
     }
   };
 
-  const checkRow = (value: number, rowIndex: number) => {
-    console.log(state.rows)
+  const checkRow = (value: number) => {
     const newRows = [...state.rows];
-    console.log(newRows)
-    const newRow = [...newRows[rowIndex].values, value];
+    const newRow = [...newRows[state.rowIndex].values, value];
     let newRowsIndex = state.rowIndex;
-
     if (newRow.length === 4) {
       checkIfSuccess(newRow);
-      newRows[rowIndex] = {
+      newRows[state.rowIndex] = {
         values: newRow,
         correctNums: checkIfCorrectNum(newRow, state.solution),
         correctPlaces: checkIfCorrectPlace(newRow, state.solution),
       };
     } else {
-      newRows[rowIndex] = {
-        ...newRows[rowIndex],
+      newRows[state.rowIndex] = {
+        ...newRows[state.rowIndex],
         values: newRow,
       };
     }
 
-    if (state.rows[rowIndex].values.length === 3) {
+    if (state.rows[state.rowIndex].values.length === 3) {
       newRowsIndex = state.rowIndex + 1;
     }
-
     return {
       ...state,
       rows: newRows,
@@ -70,15 +68,10 @@ export const gameBoardReducer = (state, action) => {
   };
 
   switch (action.type) {
-    case "check_if_success":
-      checkIfSuccess(action.checkedArr);
-      break;
     case "check_row":
-      checkRow(action.value, action.rowIndex);
-      break;
+      return checkRow(action.value);
     case "handle_new_game":
-      handleNewGame();
-      break;
+      return handleNewGame();
     case "first_render":
       return {
         ...state,
