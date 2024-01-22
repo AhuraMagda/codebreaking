@@ -2,11 +2,11 @@ import { checkIfCorrectNum } from "../helpers/checkIfCorrectNum";
 import { checkIfCorrectPlace } from "../helpers/checkIfCorrectPlace";
 import { initialRowsState } from "../helpers/initialRowsState";
 import { makeRandomNumArray } from "../helpers/makeRandomNumbers";
-import { gameBoardReducerAction, gameBoardReducerState } from "../types/GameBoardReducerStateTypes";
 
-export const gameBoardReducer = (state: gameBoardReducerState, action:gameBoardReducerAction) => {
+// TODO
+// add TS
+export const gameBoardReducer = (state, action) => {
   const checkIfSuccess = (checkedArr: number[]) => {
-    console.log("checking for success...");
     if (checkedArr.toString() === state.solution.toString()) {
       return true;
     }
