@@ -1,30 +1,25 @@
 import { checkIfCorrectNum } from "../helpers/checkIfCorrectNum";
 import { checkIfCorrectPlace } from "../helpers/checkIfCorrectPlace";
+import { initialRowsState } from "../helpers/initialRowsState";
 import { makeRandomNumArray } from "../helpers/makeRandomNumbers";
+import { gameBoardReducerAction, gameBoardReducerState } from "../types/GameBoardReducerStateTypes";
 
-const initialRowsState = Array.from({ length: 10 }, () => ({
-  values: [],
-  correctNums: 0,
-  correctPlaces: 0,
-}));
-
-export const gameBoardReducer = (state, action) => {
-
+export const gameBoardReducer = (state: gameBoardReducerState, action:gameBoardReducerAction) => {
   const checkIfSuccess = (checkedArr: number[]) => {
-    console.log("checking for success...")
+    console.log("checking for success...");
     if (checkedArr.toString() === state.solution.toString()) {
-      return true
+      return true;
     }
     return false;
-  }
+  };
 
   const checkRow = (value: number) => {
     const newRows = [...state.rows];
-    const newRow = [...newRows[state.rowIndex].values, value];
+    const newRow: number[] = [...newRows[state.rowIndex].values, value];
     let newRowsIndex = state.rowIndex;
     let isSuccess = state.isSuccess;
     let isFailure = state.isFailure;
-    // ustawia te po boku
+
     if (newRow.length === 4) {
       newRows[state.rowIndex] = {
         values: newRow,
@@ -40,7 +35,7 @@ export const gameBoardReducer = (state, action) => {
 
     if (state.rows[state.rowIndex].values.length === 3) {
       newRowsIndex = state.rowIndex + 1;
-      isSuccess = checkIfSuccess(newRow)
+      isSuccess = checkIfSuccess(newRow);
       if (state.rows[state.rows.length - 1].values.length === 3) {
         isFailure = true;
       }
@@ -52,7 +47,8 @@ export const gameBoardReducer = (state, action) => {
       isFailure,
       rows: newRows,
       rowIndex: newRowsIndex,
-      solutionValues: isSuccess || isFailure ? state.solution : state.solutionValues
+      solutionValues:
+        isSuccess || isFailure ? state.solution : state.solutionValues,
     };
   };
 
