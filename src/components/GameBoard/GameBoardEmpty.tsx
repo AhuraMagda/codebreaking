@@ -5,6 +5,10 @@ import { GameBoardEmptyProps } from "./types/GameBoardEmptyTypes";
 export default function GameBoardEmpty({ rows }: GameBoardEmptyProps) {
   return (
     <StyledGameBoard>
+      <GameBoardSingleRow rows={rows} index={9} />
+      <GameBoardSingleRow rows={rows} index={8} />
+      <GameBoardSingleRow rows={rows} index={7} />
+      <GameBoardSingleRow rows={rows} index={6} />
       <GameBoardSingleRow rows={rows} index={5} />
       <GameBoardSingleRow rows={rows} index={4} />
       <GameBoardSingleRow rows={rows} index={3} />

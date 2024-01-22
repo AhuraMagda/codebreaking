@@ -4,7 +4,7 @@ import GameBoardEmpty from "./GameBoardEmpty";
 import GameBoardSolution from "./GameBoardSolution";
 import { gameBoardReducer } from "./reducer/gameBoardReducer";
 
-const initialRowsState = Array.from({ length: 6 }, () => ({
+const initialRowsState = Array.from({ length: 10 }, () => ({
   values: [],
   correctNums: 0,
   correctPlaces: 0,

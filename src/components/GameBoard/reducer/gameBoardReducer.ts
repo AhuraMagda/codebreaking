@@ -2,37 +2,30 @@ import { checkIfCorrectNum } from "../helpers/checkIfCorrectNum";
 import { checkIfCorrectPlace } from "../helpers/checkIfCorrectPlace";
 import { makeRandomNumArray } from "../helpers/makeRandomNumbers";
 
-const initialRowsState = Array.from({ length: 6 }, () => ({
+const initialRowsState = Array.from({ length: 10 }, () => ({
   values: [],
   correctNums: 0,
   correctPlaces: 0,
 }));
 
 export const gameBoardReducer = (state, action) => {
-  // no work :<
+
   const checkIfSuccess = (checkedArr: number[]) => {
+    console.log("checking for success...")
     if (checkedArr.toString() === state.solution.toString()) {
-      return {
-        ...state,
-        isSuccess: true,
-        solutionValues: state.solution,
-      };
-  //
-    } else if (state.rows[state.rows.length - 1].values.length === 3) {
-      return {
-        ...state,
-        isFailure: true,
-        solutionValues: state.solution,
-      };
+      return true
     }
-  };
+    return false;
+  }
 
   const checkRow = (value: number) => {
     const newRows = [...state.rows];
     const newRow = [...newRows[state.rowIndex].values, value];
     let newRowsIndex = state.rowIndex;
+    let isSuccess = state.isSuccess;
+    let isFailure = state.isFailure;
+    // ustawia te po boku
     if (newRow.length === 4) {
-      checkIfSuccess(newRow);
       newRows[state.rowIndex] = {
         values: newRow,
         correctNums: checkIfCorrectNum(newRow, state.solution),
@@ -47,11 +40,19 @@ export const gameBoardReducer = (state, action) => {
 
     if (state.rows[state.rowIndex].values.length === 3) {
       newRowsIndex = state.rowIndex + 1;
+      isSuccess = checkIfSuccess(newRow)
+      if (state.rows[state.rows.length - 1].values.length === 3) {
+        isFailure = true;
+      }
     }
+
     return {
       ...state,
+      isSuccess,
+      isFailure,
       rows: newRows,
       rowIndex: newRowsIndex,
+      solutionValues: isSuccess || isFailure ? state.solution : state.solutionValues
     };
   };
 
