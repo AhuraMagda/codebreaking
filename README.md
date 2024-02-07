@@ -5,6 +5,3 @@ In progress...
 ## Technologies
 - React
 - TypeScript
-
-## Links
-[Pretty Dice Netlify](http://pretty-dice.netlify.app)
