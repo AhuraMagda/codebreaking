@@ -5,3 +5,4 @@ In progress...
 ## Technologies
 - React
 - TypeScript
+- Styled-components
